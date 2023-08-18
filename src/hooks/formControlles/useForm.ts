@@ -1,36 +1,22 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const useForm = ({ initialValues, onSubmit, validate }: FormProps) => {
-  const [values, setValues] = useState<FormValues>(initialValues);
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [touched, setTouched] = useState<FormTouched>({});
+  const [values, setValues] = useState<IFormValues>(initialValues);
+  const [errors, setErrors] = useState<IFormErrors>({});
+  const [touched, setTouched] = useState<IFormTouch>({});
 
-  const handleChange = (name: string, value: string) => {
+  const handleChanged = (name: string, value: string) => {
     setValues((prevValues) => ({
       ...prevValues,
-      [name]: value
+      [name]: value,
     }));
-
-    if (validate) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: validate({ ...values, [name]: value })[name]
-      }));
-    }
   };
 
-  const handleBlur = (name: string) => {
+  const handleBluer = (name: string) => {
     setTouched((prevTouched) => ({
       ...prevTouched,
-      [name]: true
+      [name]: true,
     }));
-
-    if (validate) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: validate(values)[name]
-      }));
-    }
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -39,12 +25,10 @@ const useForm = ({ initialValues, onSubmit, validate }: FormProps) => {
     if (validate) {
       const newErrors = validate(values);
       setErrors(newErrors);
-
       if (Object.keys(newErrors).length > 0) {
         return;
       }
     }
-
     onSubmit(values);
   };
 
@@ -52,9 +36,9 @@ const useForm = ({ initialValues, onSubmit, validate }: FormProps) => {
     values,
     errors,
     touched,
-    handleChange,
-    handleBlur,
-    handleSubmit
+    handleChanged,
+    handleBluer,
+    handleSubmit,
   };
 };
 

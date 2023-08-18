@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CustomEmailInput({values , handleChange , handleBlur , errors , touched} : ICustomInputProps) {
+export default function CustomEmailInput({values , handleChange , handleBluer , errors , touched} : ICustomInputProps) {
   return (
     <div>
        <input
@@ -8,9 +8,9 @@ export default function CustomEmailInput({values , handleChange , handleBlur , e
         name="email"
         value={values.email}
         onChange={(e) => handleChange("email", e.target.value)}
-        onBlur={() => handleBlur("email")}
+        onBlur={() => handleBluer("email")}
       />
-      {touched.email && errors.email && <span>{errors.email}</span>}
+      {touched.email && errors.email && <p>{errors.email}</p>}
     </div>
   )
 }

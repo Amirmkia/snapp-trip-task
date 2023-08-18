@@ -1,19 +1,18 @@
-
-interface FormValues {
+interface IFormValues {
   [key: string]: string;
   };
   
-interface FormErrors {
+interface IFormErrors {
   [key: string]: string;
   };
   
-interface FormTouched {
+interface IFormTouch {
   [key: string]: boolean;
   };
   
 interface FormProps  {
-  initialValues: FormValues;
-  onSubmit: (values: FormValues) => void;
-  validate?: (values: FormValues) => FormErrors;
+  initialValues: IFormValues;
+  onSubmit: (values: IFormValues) => void;
+  validate?: (values: IFormValues) => IFormErrors;
   };
 

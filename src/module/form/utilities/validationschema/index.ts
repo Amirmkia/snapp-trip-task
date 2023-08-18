@@ -1,8 +1,14 @@
-import * as Yup from "yup";
-export const validationSchema = Yup.object().shape({
-  email: Yup.string().email().required("No email provided."),
-  password: Yup.string()
-    .required("No password provided.")
-    .min(8, "Password is too short - should be 8 chars minimum.")
-    .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
-});
+export const validate = (values: IFormValues) => {
+ 
+  const errors: IFormErrors = {};
+
+  if (!values.email) {
+    errors.email = 'Email is required';
+  }
+
+  if (!values.password) {
+    errors.password = 'Password is required';
+  }
+
+  return errors;
+};
