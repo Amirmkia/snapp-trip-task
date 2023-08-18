@@ -1,45 +1,61 @@
-import CustomEmailInput from "../../components/emailInput";
-import CustomTextInput from "../../components/textInput";
 import useForm from "../../hooks/formControlles/useForm";
-import { validationSchema } from './utilities/validationschema/index';
 
 
 const initialValues = {
-  email: "",
-  password: "",
+  email: '',
+  password: ''
 };
 
-
 const validate = (values: FormValues) => {
- return validationSchema
+  const errors: FormErrors = {};
+
+  if (!values.email) {
+    errors.email = 'Email is required';
+  }
+
+  if (!values.password) {
+    errors.password = 'Password is required';
+  }
+
+  return errors;
 };
 
 const LoginForm = () => {
   const onSubmit = (values: FormValues) => {
-    console.log("values", values);
+    console.log("values" , values)
   };
 
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
-    useForm({ initialValues, onSubmit, validate });
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit
+  } = useForm({ initialValues, onSubmit, validate });
 
   return (
     <form onSubmit={handleSubmit}>
       <label>Email:</label>
-      <CustomEmailInput
-        errors={errors}
-        touched={touched}
-        handleBlur={handleBlur}
-        handleChange={handleChange}
-        values={values}
+      <input
+        type="email"
+        name="email"
+        value={values.email}
+        onChange={(e) => handleChange('email', e.target.value)}
+        onBlur={() => handleBlur('email')}
       />
+      {touched.email && errors.email && <span>{errors.email}</span>}
+
       <label>Password:</label>
-      <CustomTextInput
-        errors={errors}
-        touched={touched}
-        handleBlur={handleBlur}
-        handleChange={handleChange}
-        values={values}
+      <input
+        type="password"
+        name="password"
+        value={values.password}
+        onChange={(e) => handleChange('password', e.target.value)}
+        onBlur={() => handleBlur('password')}
       />
+      {touched.password && errors.password && <span>{errors.password}</span>}
+
       <button type="submit">Submit</button>
     </form>
   );
