@@ -6,7 +6,9 @@ const useForm = ({ initialValues, onSubmit, validate }: FormProps) => {
   const [values, setValues] = useState<FormValues>(initialValues);
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<FormTouched>({});
-
+  console.log("values" , values)
+  console.log("errors" , errors)
+  console.log("touched" , touched)
   const handleChange = (name: string, value: string) => {
     setValues((prevValues) => ({
       ...prevValues,

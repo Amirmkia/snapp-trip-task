@@ -1,3 +1,4 @@
+
 interface FormValues {
     [key: string]: string;
   };
@@ -13,5 +14,6 @@ interface FormTouched {
 interface FormProps  {
     initialValues: FormValues;
     onSubmit: (values: FormValues) => void;
-    validate?: (values: FormValues) => FormErrors;
+    validate?: (values: FormValues) => Yup.ObjectSchema;
   };
+

@@ -1,61 +1,45 @@
+import CustomEmailInput from "../../components/emailInput";
+import CustomTextInput from "../../components/textInput";
+import useForm from "../../hooks/formControlles/useForm";
+import { validationSchema } from './utilities/validationschema/index';
 
-import useForm from '../../hooks/formControlles/useForm';
 
 const initialValues = {
-  email: '',
-  password: ''
+  email: "",
+  password: "",
 };
 
+
 const validate = (values: FormValues) => {
-  const errors: FormErrors = {};
-
-  if (!values.email) {
-    errors.email = 'Email is required';
-  }
-
-  if (!values.password) {
-    errors.password = 'Password is required';
-  }
-
-  return errors;
+ return validationSchema
 };
 
 const LoginForm = () => {
   const onSubmit = (values: FormValues) => {
-    console.log("values" , values)
+    console.log("values", values);
   };
 
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit
-  } = useForm({ initialValues, onSubmit, validate });
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useForm({ initialValues, onSubmit, validate });
 
   return (
     <form onSubmit={handleSubmit}>
       <label>Email:</label>
-      <input
-        type="email"
-        name="email"
-        value={values.email}
-        onChange={(e) => handleChange('email', e.target.value)}
-        onBlur={() => handleBlur('email')}
+      <CustomEmailInput
+        errors={errors}
+        touched={touched}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+        values={values}
       />
-      {touched.email && errors.email && <span>{errors.email}</span>}
-
       <label>Password:</label>
-      <input
-        type="password"
-        name="password"
-        value={values.password}
-        onChange={(e) => handleChange('password', e.target.value)}
-        onBlur={() => handleBlur('password')}
+      <CustomTextInput
+        errors={errors}
+        touched={touched}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+        values={values}
       />
-      {touched.password && errors.password && <span>{errors.password}</span>}
-
       <button type="submit">Submit</button>
     </form>
   );
