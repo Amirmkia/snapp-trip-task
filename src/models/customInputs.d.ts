@@ -1,8 +1,11 @@
-interface ICustomInputProps {
-    values: FormValues;
-    handleChange: (name: string, value: string) => void;
-    handleBluer: (name: string) => void;
-    errors: FormErrors;
-    touched: FormTouched;
-  }
-  
+type TCustomInputValues = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+type TCustomInputProps={
+    label?: string,
+    type: HTMLInputTypeAttribute,
+    id?: string,
+    name: string,
+    value?: any,
+    ref?: RefObject<HTMLInputElement> | null | undefined,
+    onChange?: (e: React.ChangeEvent<TCustomInputValues>) => void,
+    error?: string
+}

@@ -1,4 +1,7 @@
 export const initialValues = {
-    email: '',
-    password: ''
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    ourRole: false,
   };

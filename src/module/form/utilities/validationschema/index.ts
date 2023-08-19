@@ -1,14 +1,8 @@
-export const validate = (values: IFormValues) => {
- 
-  const errors: IFormErrors = {};
-
-  if (!values.email) {
-    errors.email = 'Email is required';
-  }
-
-  if (!values.password) {
-    errors.password = 'Password is required';
-  }
-
-  return errors;
-};
+import { boolean, object, string } from "yup";
+export const validation = object({
+    first_name: string().required("FirstName is required"),
+    last_name: string().required("LastName is required"),
+    email: string().email("Email is Invalid").required("Email is required"),
+    password: string().required("Password is required").min(8 , "Use over 8 character for your password"),
+    ourRole: boolean(),
+  });
